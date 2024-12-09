@@ -5,22 +5,22 @@ const BASE_URL = 'https://pixabay.com/api/';
 
 const gallery = document.querySelector('.gallery');
 const loadMoreBtn = document.querySelector('.load-more');
-console.log(gallery);
 
 async function loadData() {
   try {
     showLoadingMessage();
-    const response = await fetch(`${BASE_URL}?key=${API_KEY}`);
+    const response = await fetch(`${BASE_URL}?key=${AP_KEY}`);
 
-    if (response.ok) {
+    if (response) {
       removeLoadingMessage();
 
       const data = await response.json();
-      console.log(data);
 
       gallery.innerHTML = renderCards(data.hits);
     }
-  } catch {}
+  } catch {
+    errorMessage();
+  }
 }
 
 loadData();
@@ -28,7 +28,7 @@ loadData();
 function showLoadingMessage() {
   const loadingMessage = document.createElement('p');
   loadingMessage.textContent = 'Loading images, please wait...';
-  loadingMessage.classList.add('loading-message');
+  loadingMessage.id = 'loading-message';
   loadMoreBtn.insertAdjacentElement('beforebegin', loadingMessage);
 }
 
@@ -38,6 +38,24 @@ function removeLoadingMessage() {
   if (loadingMessage) {
     loadingMessage.remove();
   }
+}
+
+function errorMessage() {
+  const error = document.createElement('p');
+  error.textContent =
+    'Sorry, there are no images matching your search query. Please, try again!';
+  error.classList.add("error-message")
+
+  document.body.append(error);
+
+  setTimeout(() => {
+    error.classList.add('error-message--hide')
+    setTimeout(() => error.remove(), 1000);
+  }, 4000);
+
+  // setTimeout(() => {
+  //   error.remove();
+  // }, 400000);
 }
 
 function createCard(card) {

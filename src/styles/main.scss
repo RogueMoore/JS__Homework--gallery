@@ -1,7 +1,6 @@
 body {
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   margin: 0;
-  
 }
 
 h1,
@@ -42,7 +41,7 @@ ol {
     font-size: 18px;
     color: #3f51b5;
 
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Montserrat', sans-serif;
   }
 
   &__input {
@@ -51,7 +50,7 @@ ol {
     padding: 5px 10px;
     font-size: 16px;
 
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Montserrat', sans-serif;
   }
 }
 
@@ -101,19 +100,51 @@ ol {
     color: #000;
 
     text-align: center;
+
+    b {
+      font-weight: 600;
+    }
   }
 }
 
-.loading-message {
+#loading-message {
   font-family: Montserrat;
-  ;
 
   margin: 0 auto;
   width: fit-content;
 
   font-size: 16px;
   line-height: 24px;
-  color: #2E2F42;
+  color: #2e2f42;
+}
+
+.error-message {
+  padding: 0 32px 0 32px;
+  position: absolute;
+  top: 136px; //96px default
+  right: 36px;
+
+  width: 360px; //432 default
+  height: 88px;
+
+  background-color: #ef4040;
+  border-radius: 4px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 16px;
+  color: #fafafb;
+
+  box-sizing: border-box;
+
+  opacity: 1;
+  transition: opacity 1s ease;
+
+  &--hide {
+    opacity: 0;
+  }
 }
 
 .load-more {
