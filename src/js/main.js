@@ -9,7 +9,7 @@ const loadMoreBtn = document.querySelector('.load-more');
 async function loadData() {
   try {
     showLoadingMessage();
-    const response = await fetch(`${BASE_URL}?key=${AP_KEY}`);
+    const response = await fetch(`${BASE_URL}?key=${API_KEY}`);
 
     if (response) {
       removeLoadingMessage();
@@ -33,7 +33,7 @@ function showLoadingMessage() {
 }
 
 function removeLoadingMessage() {
-  const loadingMessage = document.querySelector('.loading-message');
+  const loadingMessage = document.querySelector('#loading-message');
 
   if (loadingMessage) {
     loadingMessage.remove();
