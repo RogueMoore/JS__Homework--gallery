@@ -44,18 +44,14 @@ function errorMessage() {
   const error = document.createElement('p');
   error.textContent =
     'Sorry, there are no images matching your search query. Please, try again!';
-  error.classList.add("error-message")
+  error.classList.add('error-message');
 
   document.body.append(error);
 
   setTimeout(() => {
-    error.classList.add('error-message--hide')
+    error.classList.add('error-message--hide');
     setTimeout(() => error.remove(), 1000);
   }, 4000);
-
-  // setTimeout(() => {
-  //   error.remove();
-  // }, 400000);
 }
 
 function createCard(card) {
