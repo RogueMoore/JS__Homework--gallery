@@ -9,15 +9,11 @@ console.log(gallery);
 
 async function loadData() {
   try {
-    const waitNotify = document.createElement('p');
-    waitNotify.textContent = 'Loading images, please wait...';
-    waitNotify.classList.add('waitNotify')
-    loadMoreBtn.insertAdjacentElement('beforebegin', waitNotify);
-
+    showLoadingMessage();
     const response = await fetch(`${BASE_URL}?key=${API_KEY}`);
 
     if (response.ok) {
-      waitNotify.remove();
+      removeLoadingMessage();
 
       const data = await response.json();
       console.log(data);
@@ -28,6 +24,21 @@ async function loadData() {
 }
 
 loadData();
+
+function showLoadingMessage() {
+  const loadingMessage = document.createElement('p');
+  loadingMessage.textContent = 'Loading images, please wait...';
+  loadingMessage.classList.add('loading-message');
+  loadMoreBtn.insertAdjacentElement('beforebegin', loadingMessage);
+}
+
+function removeLoadingMessage() {
+  const loadingMessage = document.querySelector('.loading-message');
+
+  if (loadingMessage) {
+    loadingMessage.remove();
+  }
+}
 
 function createCard(card) {
   return `
