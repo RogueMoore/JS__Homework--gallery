@@ -175,5 +175,8 @@ ol {
     outline: 3px solid #6a85ff;
     outline-offset: 2px;
   }
-}
 
+  &--hide {
+    display: none;
+  }
+}

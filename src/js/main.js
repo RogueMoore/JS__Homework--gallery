@@ -13,12 +13,14 @@ async function loadData() {
 
     if (response) {
       removeLoadingMessage();
+      loadMoreBtn.classList.remove('load-more--hide');
 
       const data = await response.json();
 
       gallery.innerHTML = renderCards(data.hits);
     }
   } catch {
+    removeLoadingMessage();
     errorMessage();
   }
 }
