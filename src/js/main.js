@@ -3,15 +3,31 @@
 const API_KEY = '47398342-c4f399e57f5c71f1dbfff10b5';
 const BASE_URL = 'https://pixabay.com/api/';
 
+const searchForm = document.querySelector('.search-form');
 const gallery = document.querySelector('.gallery');
 const loadMoreBtn = document.querySelector('.load-more');
 
-async function loadData() {
+searchForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const query = e.target.elements.searchQuery.value;
+
+  if (!query) {
+    errorMessage();
+    return;
+  }
+
+  loadData(query);
+  e.target.reset()
+});
+
+async function loadData(query = '') {
   try {
     showLoadingMessage();
-    const response = await fetch(`${BASE_URL}?key=${API_KEY}`);
+    const response = await fetch(
+      `${BASE_URL}?key=${API_KEY}${query ? `&q=${query}` : ''}`
+    );
 
-    if (response) {
+    if (response.ok) {
       removeLoadingMessage();
       loadMoreBtn.classList.remove('load-more--hide');
 
@@ -20,12 +36,13 @@ async function loadData() {
       gallery.innerHTML = renderCards(data.hits);
     }
   } catch {
-    removeLoadingMessage();
     errorMessage();
+  } finally {
+    removeLoadingMessage();
   }
 }
 
-loadData();
+// loadData();
 
 function showLoadingMessage() {
   const loadingMessage = document.createElement('p');
